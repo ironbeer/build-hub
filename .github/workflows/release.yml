@@ -6,11 +6,11 @@ permissions:
 on:
   push:
     tags:
-      - 'chatgpt-desktop:*'
+      - 'chatgpt-desktop-*'
 
 jobs:
   chatgpt-desktop:
-    if: startsWith(github.ref_name, 'chatgpt-desktop:')
+    if: startsWith(github.ref_name, 'chatgpt-desktop-')
     name: chatgpt-desktop
     runs-on: ubuntu-latest
     steps:
