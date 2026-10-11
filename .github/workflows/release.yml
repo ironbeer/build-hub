@@ -6,11 +6,11 @@ permissions:
 on:
   push:
     tags:
-      - 'chatgpt-desktop-*'
+      - 'chatgpt-desktop/*'
 
 jobs:
   chatgpt-desktop:
-    if: startsWith(github.ref_name, 'chatgpt-desktop-')
+    if: startsWith(github.ref_name, 'chatgpt-desktop/')
     name: chatgpt-desktop
     runs-on: ubuntu-latest
     steps:
@@ -27,6 +27,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           file: ./Dockerfile.chatgpt-desktop
-          tags: ghcr.io/${{ github.repository }}/${{ github.ref_name }}
+          tags: ghcr.io/${{ github.repository }}/chatgpt-desktop:${{ steps.setup.outputs.ref_version }}
           platforms: linux/amd64,linux/arm64
           push: true

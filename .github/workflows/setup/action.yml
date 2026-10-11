@@ -9,7 +9,7 @@ inputs:
     default: ''
 
 outputs:
-  ref:
+  ref_version:
     value: ${{ steps.gitref.outputs.out0 }}
   commit-hash:
     value: ${{ steps.commithash.outputs.out0 }}
