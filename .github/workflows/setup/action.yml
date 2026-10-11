@@ -2,11 +2,11 @@ inputs:
   github-token:
     required: true
   checkout-repo:
-    required: true
+    default: ''
   checkout-ssh-key:
     default: ''
   checkout-path:
-    required: true
+    default: ''
 
 outputs:
   ref:
@@ -36,6 +36,7 @@ runs:
       shell: bash
 
     - name: Checkout
+      if: inputs.checkout-repo != ''
       uses: actions/checkout@v4
       with:
         repository: ${{ inputs.checkout-repo }}
@@ -44,6 +45,7 @@ runs:
         path: ${{ inputs.checkout-path }}
 
     - name: Output commit-hash
+      if: inputs.checkout-repo != ''
       id: commithash
       run: echo "out0=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.checkout-path }}
