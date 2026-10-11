@@ -1,0 +1,15 @@
+FROM linuxserver/webtop:ubuntu-kde-3bd74b74-ls184
+
+ARG TARGETARCH
+ARG CHATGPT_CACHE_BUST=0
+
+RUN apt update && \
+    apt install -y --no-install-recommends ca-certificates curl && \
+    curl --fail --show-error --silent --location --retry 3 \
+      "https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_${TARGETARCH}.deb" \
+      --output /tmp/chatgpt.deb && \
+    apt install -y --no-install-recommends /tmp/chatgpt.deb && \
+    command -v chatgpt && \
+    rm -f /tmp/chatgpt.deb && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*

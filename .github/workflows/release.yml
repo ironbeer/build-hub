@@ -1,0 +1,26 @@
+name: Build
+
+permissions:
+  packages: write
+
+on:
+  push:
+    tags:
+      - 'chatgpt-desktop:*'
+
+jobs:
+  chatgpt-desktop:
+    if: startsWith(github.ref_name, 'chatgpt-desktop:')
+    name: chatgpt-desktop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          file: ./Dockerfile.chatgpt-desktop
+          tags: ghcr.io/${{ github.repository }}/${{ github.ref_name }}
+          platforms: linux/amd64,linux/arm64
+          push: true
