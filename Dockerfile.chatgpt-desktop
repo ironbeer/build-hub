@@ -1,4 +1,4 @@
-FROM linuxserver/webtop:ubuntu-kde-3bd74b74-ls184
+FROM linuxserver/webtop:ubuntu-xfce-5a2151ed-ls5
 
 ARG TARGETARCH
 ARG CHATGPT_CACHE_BUST=0
